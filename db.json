@@ -1,0 +1,71 @@
+{
+  "products": [
+    {
+      "id": "8e9d4d76-a1ae-407a-8da8-4e53acde1700",
+      "name": "Tomato",
+      "price": 3.5
+    },
+    {
+      "id": "e58943cb-9aa9-4c59-81f8-e61bdd2bb66f",
+      "name": "Mouse",
+      "price": 11
+    },
+    {
+      "id": "84b00319-973a-4b4b-801b-bcdd31344b6b",
+      "name": "Wireless Mouse",
+      "price": 20
+    },
+    {
+      "id": "9c096fa2-c3c1-47ae-a7ae-81ccdffd6c97",
+      "name": "Vitron tv",
+      "price": 52
+    },
+    {
+      "id": "a92471de-f663-4982-9366-906ba06e5e31",
+      "name": "Wireless Mouse",
+      "price": 15.99
+    },
+    {
+      "id": "c81e7836-cf10-4b55-9fe4-b0e7643417f5",
+      "name": "Wireless Mouse",
+      "price": 20
+    },
+    {
+      "id": "021e641e-7ebf-40b6-9859-8c52d9f558ee",
+      "name": "Sample product",
+      "price": 58
+    },
+    {
+      "id": "5bbf18e0-3ed7-4165-998a-4fcdc91f2911",
+      "name": "M18 Logitech",
+      "price": 58
+    }
+  ],
+  "users": [
+    {
+      "id": 1749116519695,
+      "username": "erik",
+      "password": "$2b$10$R4zB/RQkfFUVZakLm1/EpO.iUW98I0Ottv42ZS6R.yLpX6vNSJYKy"
+    },
+    {
+      "id": 1749121598395,
+      "username": "newuser",
+      "password": "$2b$10$yBW.tx.6EkOjAhs/huhZPOB4fZXC.VoNMNkx6jXlXwdRzWXBZe3Oq"
+    },
+    {
+      "id": 1749127182325,
+      "username": "Erik",
+      "password": "$2b$10$9PFbK62wXOfTQRJS25UNNe9EaPPhakxd/JM6tm5xfkzf4EbXqSih2"
+    },
+    {
+      "id": 1749129078008,
+      "username": "John Doe ",
+      "password": "$2b$10$tvp49p7KFcE6sXQj/Hfvz.dM7o1mRHoKOmrGL/gI7YozuDYK.4iiu"
+    },
+    {
+      "id": 1749129679233,
+      "username": "Jane Doe ",
+      "password": "$2b$10$pvuS0ifNSk7oNB6SYibNaOxlyeWpj/75sKcio97uj1ZX8aToi6p5C"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard | Erick Tech Shop</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <h1>Erick Tech Shop - Dashboard</h1>
+
+  <div class="dashboard-info">
+    <p>Welcome, <span id="usernameDisplay"></span>!</p>
+    <button onclick="logout()">Logout</button>
+
+    <h2>Add a New Product</h2>
+    <input type="text" id="productName" placeholder="Product Name" />
+    <input type="number" id="productPrice" placeholder="Product Price" />
+    <input type="text" id="productImageUrl" placeholder="Image URL (optional)" />
+    <textarea id="productDescription" placeholder="Product Description"></textarea>
+    <button onclick="addProduct()">Add Product</button>
+
+    <h2>All Products</h2>
+    <div id="productList" class="product-grid"></div>
+  </div>
+
+  <script>
+    document.getElementById("usernameDisplay").textContent = localStorage.getItem("username") || "User";
+
+    function logout() {
+      localStorage.removeItem("token");
+      localStorage.removeItem("username");
+      window.location.href = "/";
+    }
+
+    async function addProduct() {
+      const name = document.getElementById("productName").value.trim();
+      const price = parseFloat(document.getElementById("productPrice").value);
+      const imageUrl = document.getElementById("productImageUrl").value.trim();
+      const description = document.getElementById("productDescription").value.trim();
+      const token = localStorage.getItem("token");
+
+      if (!name || isNaN(price)) {
+        alert("Please enter valid name and price");
+        return;
+      }
+
+      try {
+        const res = await fetch("/api/products", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+          },
+          body: JSON.stringify({ name, price, imageUrl, description }),
+        });
+
+        if (!res.ok) {
+          const error = await res.json();
+          throw new Error(error.message || "Failed to add product");
+        }
+
+        // Clear fields
+        document.getElementById("productName").value = "";
+        document.getElementById("productPrice").value = "";
+        document.getElementById("productImageUrl").value = "";
+        document.getElementById("productDescription").value = "";
+
+        fetchProducts();
+      } catch (err) {
+        alert("Error: " + err.message);
+      }
+    }
+
+    async function fetchProducts() {
+      const token = localStorage.getItem("token");
+
+      try {
+        const res = await fetch("/api/products", {
+          headers: { "Authorization": `Bearer ${token}` },
+        });
+
+        const products = await res.json();
+        const container = document.getElementById("productList");
+        container.innerHTML = "";
+
+        products.forEach((product) => {
+          const div = document.createElement("div");
+          div.className = "product-card";
+          div.innerHTML = `
+            ${product.imageUrl ? `<img src="${product.imageUrl}" alt="${product.name}" class="product-image" />` : ""}
+            <h3>${product.name}</h3>
+            <p>Price: $${product.price}</p>
+            <p>${product.description || ""}</p>
+          `;
+          container.appendChild(div);
+        });
+      } catch (err) {
+        console.error("Failed to fetch products:", err);
+      }
+    }
+
+    fetchProducts();
+  </script>
+</body>
+</html>

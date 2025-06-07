@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login & Register | Erick Tech Shop</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <h1>Welcome to Erick Tech Shop</h1>
+
+  <div class="auth-container">
+    <!-- Register Form -->
+    <div class="form-box">
+      <h2>Register</h2>
+      <input type="text" id="regUsername" placeholder="Username" />
+      <input type="password" id="regPassword" placeholder="Password" />
+      <button onclick="register()">Register</button>
+    </div>
+
+    <!-- Login Form -->
+    <div class="form-box">
+      <h2>Login</h2>
+      <input type="text" id="loginUsername" placeholder="Username" />
+      <input type="password" id="loginPassword" placeholder="Password" />
+      <button onclick="login()">Login</button>
+    </div>
+  </div>
+
+  <!-- Logout button (optional, only if you want it here) -->
+  <div id="logoutBox" style="display: none; margin-top: 20px;">
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    const apiBase = '/api';
+
+    async function register() {
+      const username = document.getElementById("regUsername").value;
+      const password = document.getElementById("regPassword").value;
+
+      const response = await fetch(`${apiBase}/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+      alert(data.message || "Registered successfully");
+    }
+
+    async function login() {
+      const username = document.getElementById("loginUsername").value;
+      const password = document.getElementById("loginPassword").value;
+
+      const response = await fetch(`${apiBase}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("username", username);
+        alert("Login successful!");
+        window.location.href = "/dashboard.html";
+      } else {
+        alert(data.message || "Login failed");
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem("token");
+      localStorage.removeItem("username");
+      alert("You have been logged out.");
+      window.location.reload();
+    }
+
+    // Optional: show logout button if already logged in
+    if (localStorage.getItem("token")) {
+      document.getElementById("logoutBox").style.display = "block";
+    }
+  </script>
+</body>
+</html>
