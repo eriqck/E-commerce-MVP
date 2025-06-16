@@ -33,7 +33,7 @@ app.get('/api/products', (req, res) => {
 // POST a product (protected)
 app.post('/api/products', authenticateToken, (req, res) => {
   const db = readDB();
-  const { name, price, imageUrl, description } = req.body;
+  const { name, price, imageUrl, description, category } = req.body;
 
   if (!name || isNaN(price)) {
     return res.status(400).json({ message: "Name and valid price are required" });
@@ -44,7 +44,8 @@ app.post('/api/products', authenticateToken, (req, res) => {
     name,
     price,
     image: imageUrl || "",
-    description: description || ""
+    description: description || "",
+    category: category || ""
   };
 
   db.products.push(newProduct);
@@ -53,16 +54,16 @@ app.post('/api/products', authenticateToken, (req, res) => {
 });
 
 // PUT update product by ID (protected)
-app.put('/api/products/:id', authenticateToken, (req, res) => {
-  const db = readDB();
-  const index = db.products.findIndex(p => p.id === req.params.id);
-  if (index === -1) return res.status(404).json({ message: 'Product not found' });
+const { name, price, imageUrl, description, category } = req.body;
 
-  const { name, price } = req.body;
-  db.products[index] = { ...db.products[index], name, price };
-  writeDB(db);
-  res.json(db.products[index]);
-});
+const newProduct = {
+  id: uuidv4(),
+  name,
+  price,
+  image: imageUrl || "",
+  description: description || "",
+  category: category || ""  // ✅ this will now work!
+};
 
 // DELETE product by ID (protected)
 app.delete('/api/products/:id', authenticateToken, (req, res) => {

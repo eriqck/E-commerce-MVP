@@ -1,51 +1,25 @@
 {
   "products": [
     {
-      "id": "8e9d4d76-a1ae-407a-8da8-4e53acde1700",
-      "name": "Tomato",
-      "price": 3.5
-    },
-    {
-      "id": "e58943cb-9aa9-4c59-81f8-e61bdd2bb66f",
-      "name": "Mouse",
-      "price": 11
-    },
-    {
-      "id": "84b00319-973a-4b4b-801b-bcdd31344b6b",
-      "name": "Wireless Mouse",
-      "price": 20
-    },
-    {
-      "id": "9c096fa2-c3c1-47ae-a7ae-81ccdffd6c97",
-      "name": "Vitron tv",
-      "price": 52
-    },
-    {
-      "id": "a92471de-f663-4982-9366-906ba06e5e31",
-      "name": "Wireless Mouse",
-      "price": 15.99
-    },
-    {
-      "id": "c81e7836-cf10-4b55-9fe4-b0e7643417f5",
-      "name": "Wireless Mouse",
-      "price": 20
-    },
-    {
-      "id": "021e641e-7ebf-40b6-9859-8c52d9f558ee",
-      "name": "Sample product",
-      "price": 58
-    },
-    {
-      "id": "5bbf18e0-3ed7-4165-998a-4fcdc91f2911",
-      "name": "M18 Logitech",
-      "price": 58
-    },
-    {
       "id": "c059f468-8d47-46ea-962b-963e90567907",
       "name": "Mouse",
-      "price": 20,
+      "price": 150,
       "image": "https://m.media-amazon.com/images/I/61LtuGzXeaL._AC_SL1500_.jpg",
       "description": "Wireless Mouse"
+    },
+    {
+      "id": "5e6c5edc-8c08-4cb2-a9f8-af8205bc447d",
+      "name": "Vitron smart",
+      "price": 40,
+      "image": "https://m.media-amazon.com/images/I/41LG0mB1uEL._SS522_.jpg",
+      "description": "32' vitron \ntv"
+    },
+    {
+      "id": "63f13398-ed4c-4c7d-812b-a9fa02e93da4",
+      "name": "Samsung Woofer",
+      "price": 68,
+      "image": "https://cdn.pixabay.com/photo/2016/03/09/09/17/speaker-1240996_1280.jpg",
+      "description": "Samsung Woofer"
     }
   ],
   "users": [
@@ -62,17 +36,37 @@
     {
       "id": 1749127182325,
       "username": "Erik",
-      "password": "$2b$10$9PFbK62wXOfTQRJS25UNNe9EaPPhakxd/JM6tm5xfkzf4EbXqSih2"
+      "password": "$2b$10$9PFbK62wXOfTQRJS25UNNe9EaPPhakxd/JM6tm5xfkzf4EbXqSih2i",
+      "isAdmin": true
     },
     {
       "id": 1749129078008,
       "username": "John Doe ",
-      "password": "$2b$10$tvp49p7KFcE6sXQj/Hfvz.dM7o1mRHoKOmrGL/gI7YozuDYK.4iiu"
+      "password": "$2b$10$tvp49p7KFcE6sXQj/Hfvz.dM7o1mRHoKOmrGL/gI7YozuDYK.4iiu",
+      "isAdmin": false
     },
     {
       "id": 1749129679233,
       "username": "Jane Doe ",
-      "password": "$2b$10$pvuS0ifNSk7oNB6SYibNaOxlyeWpj/75sKcio97uj1ZX8aToi6p5C"
+      "password": "$2b$10$pvuS0ifNSk7oNB6SYibNaOxlyeWpj/75sKcio97uj1ZX8aToi6p5C",
+      "isAdmin": false
+    },
+    {
+      "id": 1750063266235,
+      "username": "admin",
+      "password": "$2b$10$AoyZzkxt5Asp8emg8d3Xa.PAHJfRgMLr7V1qyV6TIjY5y2z/ueh4C"
+    },
+    {
+      "id": 1750065766712,
+      "username": "Admin",
+      "password": "$2b$10$0ve.iACtJ0LOe/3dMJd3TeVA.tpKZ97BZ6ZVYqs5tJSJeVV3fa0Cy",
+      "isAdmin": true
+    },
+    {
+      "id": 1750066041329,
+      "username": "Omondi",
+      "password": "$2b$10$A8RPWhcusyVmMwg6iT.dz.Q8URoRpjy0QOAr.7n2seMV1Ap2mycy.",
+      "isAdmin": false
     }
   ]
 }

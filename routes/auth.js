@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 const DB_FILE = 'db.json';
-const SECRET_KEY = 'your_secret_key'; // Replace with env var in production
+const SECRET_KEY = 'your_secret_key'; // Replace with process.env.SECRET_KEY in production
 
 function readDB() {
   return JSON.parse(fs.readFileSync(DB_FILE));
@@ -25,10 +25,12 @@ router.post('/register', async (req, res) => {
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
+
   const newUser = {
     id: Date.now(),
     username,
-    password: hashedPassword
+    password: hashedPassword,
+    isAdmin: false // By default, users are not admins
   };
 
   db.users.push(newUser);
@@ -52,11 +54,13 @@ router.post('/login', async (req, res) => {
     return res.status(400).json({ message: 'Invalid credentials' });
   }
 
-  const token = jwt.sign({ id: user.id, username: user.username }, SECRET_KEY, {
-    expiresIn: '1h'
-  });
+  const token = jwt.sign(
+    { id: user.id, username: user.username, isAdmin: user.isAdmin || false },
+    SECRET_KEY,
+    { expiresIn: '1h' }
+  );
 
-  res.json({ token });
+  res.json({ token, isAdmin: user.isAdmin || false });
 });
 
 module.exports = router;

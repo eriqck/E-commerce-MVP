@@ -5,6 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dashboard | Erick Tech Shop</title>
   <link rel="stylesheet" href="/css/styles.css" />
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    .dashboard-info {
+      max-width: 900px;
+      margin: auto;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .product-card {
+      border: 1px solid #ccc;
+      padding: 12px;
+      border-radius: 8px;
+    }
+    .product-card img {
+      max-width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+    .actions {
+      margin-top: 10px;
+    }
+    .actions button {
+      margin-right: 6px;
+    }
+    input, textarea, select {
+      display: block;
+      margin-bottom: 10px;
+      width: 100%;
+      padding: 8px;
+    }
+    .search-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 <body>
   <h1>Erick Tech Shop - Dashboard</h1>
@@ -16,9 +61,16 @@
     <h2>Add a New Product</h2>
     <input type="text" id="productName" placeholder="Product Name" />
     <input type="number" id="productPrice" placeholder="Product Price" />
+    <input type="text" id="productCategory" placeholder="Category" />
     <input type="text" id="productImageUrl" placeholder="Image URL (optional)" />
     <textarea id="productDescription" placeholder="Product Description"></textarea>
     <button onclick="addProduct()">Add Product</button>
+
+    <h2>Search & Filter</h2>
+    <div class="search-filter">
+      <input type="text" id="searchInput" placeholder="Search by name..." oninput="renderProducts()" />
+      <input type="text" id="filterCategory" placeholder="Filter by category..." oninput="renderProducts()" />
+    </div>
 
     <h2>All Products</h2>
     <div id="productList" class="product-grid"></div>
@@ -26,6 +78,8 @@
 
   <script>
     document.getElementById("usernameDisplay").textContent = localStorage.getItem("username") || "User";
+    const token = localStorage.getItem("token");
+    let allProducts = [];
 
     function logout() {
       localStorage.removeItem("token");
@@ -38,7 +92,7 @@
       const price = parseFloat(document.getElementById("productPrice").value);
       const imageUrl = document.getElementById("productImageUrl").value.trim();
       const description = document.getElementById("productDescription").value.trim();
-      const token = localStorage.getItem("token");
+      const category = document.getElementById("productCategory").value.trim();
 
       if (!name || isNaN(price)) {
         alert("Please enter valid name and price");
@@ -52,7 +106,7 @@
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`,
           },
-          body: JSON.stringify({ name, price, imageUrl, description }),
+          body: JSON.stringify({ name, price, imageUrl, description, category }),
         });
 
         if (!res.ok) {
@@ -60,11 +114,11 @@
           throw new Error(error.message || "Failed to add product");
         }
 
-        // Clear fields
         document.getElementById("productName").value = "";
         document.getElementById("productPrice").value = "";
         document.getElementById("productImageUrl").value = "";
         document.getElementById("productDescription").value = "";
+        document.getElementById("productCategory").value = "";
 
         fetchProducts();
       } catch (err) {
@@ -75,23 +129,104 @@
     async function fetchProducts() {
       try {
         const res = await fetch("/api/products");
-        const products = await res.json();
-        const container = document.getElementById("productList");
-        container.innerHTML = "";
-
-        products.forEach((product) => {
-          const div = document.createElement("div");
-          div.className = "product-card";
-          div.innerHTML = `
-            ${product.image ? `<img src="${product.image}" alt="${product.name}" class="product-image" />` : ""}
-            <h3>${product.name}</h3>
-            <p>Price: $${product.price}</p>
-            <p>${product.description || ""}</p>
-          `;
-          container.appendChild(div);
-        });
+        allProducts = await res.json();
+        renderProducts();
       } catch (err) {
         console.error("Failed to fetch products:", err);
+      }
+    }
+
+    function renderProducts() {
+      const searchQuery = document.getElementById("searchInput").value.toLowerCase();
+      const categoryFilter = document.getElementById("filterCategory").value.toLowerCase();
+      const container = document.getElementById("productList");
+
+      const filtered = allProducts.filter(p => {
+        return (
+          p.name.toLowerCase().includes(searchQuery) &&
+          (!categoryFilter || (p.category && p.category.toLowerCase().includes(categoryFilter)))
+        );
+      });
+
+      container.innerHTML = "";
+      filtered.forEach(product => {
+        const div = document.createElement("div");
+        div.className = "product-card";
+        div.innerHTML = `
+          ${product.image ? `<img src="${product.image}" alt="${product.name}" />` : ""}
+          <h3>${product.name}</h3>
+          <p><strong>Price:</strong> $${product.price}</p>
+          <p><strong>Category:</strong> ${product.category || "N/A"}</p>
+          <p>${product.description || ""}</p>
+          <div class="actions">
+            <button onclick="editProduct('${product.id}')">Edit</button>
+            <button onclick="deleteProduct('${product.id}')">Delete</button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    async function editProduct(productId) {
+      const product = allProducts.find(p => p.id === productId);
+      if (!product) return alert("Product not found");
+
+      const newName = prompt("Edit product name:", product.name);
+      const newPrice = prompt("Edit price:", product.price);
+      const newCategory = prompt("Edit category:", product.category || "");
+      const newDescription = prompt("Edit description:", product.description || "");
+      const newImage = prompt("Edit image URL:", product.image || "");
+
+      if (!newName || isNaN(parseFloat(newPrice))) {
+        return alert("Invalid name or price.");
+      }
+
+      try {
+        const res = await fetch(`/api/products/${productId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            name: newName,
+            price: parseFloat(newPrice),
+            category: newCategory,
+            description: newDescription,
+            imageUrl: newImage
+          }),
+        });
+
+        if (!res.ok) {
+          const error = await res.json();
+          throw new Error(error.message || "Failed to update product");
+        }
+
+        fetchProducts();
+      } catch (err) {
+        alert("Error: " + err.message);
+      }
+    }
+
+    async function deleteProduct(productId) {
+      if (!confirm("Are you sure you want to delete this product?")) return;
+
+      try {
+        const res = await fetch(`/api/products/${productId}`, {
+          method: "DELETE",
+          headers: {
+            "Authorization": `Bearer ${token}`,
+          },
+        });
+
+        if (!res.ok) {
+          const error = await res.json();
+          throw new Error(error.message || "Failed to delete product");
+        }
+
+        fetchProducts();
+      } catch (err) {
+        alert("Error: " + err.message);
       }
     }
 
