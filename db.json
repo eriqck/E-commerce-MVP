@@ -15,11 +15,11 @@
       "description": "32' vitron \ntv"
     },
     {
-      "id": "63f13398-ed4c-4c7d-812b-a9fa02e93da4",
-      "name": "Samsung Woofer",
-      "price": 68,
-      "image": "https://cdn.pixabay.com/photo/2016/03/09/09/17/speaker-1240996_1280.jpg",
-      "description": "Samsung Woofer"
+      "id": "5e6c5edc-8c08-4cb2-a9f8-af8205bc447d",
+      "name": "Vitron smart",
+      "price": 100,
+      "image": "https://m.media-amazon.com/images/I/41LG0mB1uEL._SS522_.jpg",
+      "description": "42' vitron \ntv"
     }
   ],
   "users": [
@@ -67,6 +67,175 @@
       "username": "Omondi",
       "password": "$2b$10$A8RPWhcusyVmMwg6iT.dz.Q8URoRpjy0QOAr.7n2seMV1Ap2mycy.",
       "isAdmin": false
+    },
+    {
+      "id": 1751374246183,
+      "username": "Omollo",
+      "password": "$2b$10$twwADi9aq7rg9mE4DMoB9eBN41lQPQVKw7hHl5zE1uTspF5.6fXBS",
+      "isAdmin": false
+    }
+  ],
+  "orders": [
+    {
+      "id": "7160dde8-6153-46fe-8913-3f0215b3a197",
+      "userId": 1750063266235,
+      "username": "admin",
+      "items": [
+        {
+          "id": "c059f468-8d47-46ea-962b-963e90567907",
+          "name": "Mouse",
+          "price": 150,
+          "image": "https://m.media-amazon.com/images/I/61LtuGzXeaL._AC_SL1500_.jpg",
+          "description": "Wireless Mouse",
+          "quantity": 3
+        }
+      ],
+      "total": 150,
+      "date": "2025-07-01T12:26:06.735Z"
+    },
+    {
+      "id": "2c9fe4cf-21f1-4d9e-947f-fbde05a7174d",
+      "userId": 1750063266235,
+      "username": "admin",
+      "items": [
+        {
+          "id": "c059f468-8d47-46ea-962b-963e90567907",
+          "name": "Mouse",
+          "price": 150,
+          "image": "https://m.media-amazon.com/images/I/61LtuGzXeaL._AC_SL1500_.jpg",
+          "description": "Wireless Mouse",
+          "quantity": 1
+        },
+        {
+          "id": "5e6c5edc-8c08-4cb2-a9f8-af8205bc447d",
+          "name": "Vitron smart",
+          "price": 40,
+          "image": "https://m.media-amazon.com/images/I/41LG0mB1uEL._SS522_.jpg",
+          "description": "32' vitron \ntv",
+          "quantity": 1
+        }
+      ],
+      "total": 190,
+      "date": "2025-07-01T12:26:22.274Z"
+    },
+    {
+      "id": "ac392502-9f23-4448-9876-e84982e6ae3f",
+      "userId": 1750063266235,
+      "username": "admin",
+      "items": [
+        {
+          "id": "c059f468-8d47-46ea-962b-963e90567907",
+          "name": "Mouse",
+          "price": 150,
+          "image": "https://m.media-amazon.com/images/I/61LtuGzXeaL._AC_SL1500_.jpg",
+          "description": "Wireless Mouse"
+        },
+        {
+          "id": "c059f468-8d47-46ea-962b-963e90567907",
+          "name": "Mouse",
+          "price": 150,
+          "image": "https://m.media-amazon.com/images/I/61LtuGzXeaL._AC_SL1500_.jpg",
+          "description": "Wireless Mouse"
+        },
+        {
+          "id": "c059f468-8d47-46ea-962b-963e90567907",
+          "name": "Mouse",
+          "price": 150,
+          "image": "https://m.media-amazon.com/images/I/61LtuGzXeaL._AC_SL1500_.jpg",
+          "description": "Wireless Mouse"
+        }
+      ],
+      "total": 450,
+      "date": "2025-07-01T12:41:16.709Z"
+    },
+    {
+      "id": "0ff8bf33-80e8-4a79-8f8d-fcdda2ee0ceb",
+      "userId": 1750063266235,
+      "username": "admin",
+      "items": [
+        {
+          "id": "c059f468-8d47-46ea-962b-963e90567907",
+          "name": "Mouse",
+          "price": 150,
+          "image": "https://m.media-amazon.com/images/I/61LtuGzXeaL._AC_SL1500_.jpg",
+          "description": "Wireless Mouse"
+        }
+      ],
+      "total": 150,
+      "date": "2025-07-01T12:50:06.939Z"
+    },
+    {
+      "id": "75c403f5-c1dc-4a08-8bca-654da9349dc5",
+      "userId": 1751374246183,
+      "username": "Omollo",
+      "items": [
+        {
+          "id": "c059f468-8d47-46ea-962b-963e90567907",
+          "name": "Mouse",
+          "price": 150,
+          "image": "https://m.media-amazon.com/images/I/61LtuGzXeaL._AC_SL1500_.jpg",
+          "description": "Wireless Mouse"
+        },
+        {
+          "id": "c059f468-8d47-46ea-962b-963e90567907",
+          "name": "Mouse",
+          "price": 150,
+          "image": "https://m.media-amazon.com/images/I/61LtuGzXeaL._AC_SL1500_.jpg",
+          "description": "Wireless Mouse"
+        }
+      ],
+      "total": 300,
+      "date": "2025-07-01T12:51:28.086Z"
+    },
+    {
+      "id": "095313e3-e8ac-4655-a08e-af166ff614a1",
+      "userId": 1751374246183,
+      "username": "Omollo",
+      "items": [
+        {
+          "id": "c059f468-8d47-46ea-962b-963e90567907",
+          "name": "Mouse",
+          "price": 150,
+          "image": "https://m.media-amazon.com/images/I/61LtuGzXeaL._AC_SL1500_.jpg",
+          "description": "Wireless Mouse",
+          "quantity": null
+        },
+        {
+          "id": "5e6c5edc-8c08-4cb2-a9f8-af8205bc447d",
+          "name": "Vitron smart",
+          "price": 40,
+          "image": "https://m.media-amazon.com/images/I/41LG0mB1uEL._SS522_.jpg",
+          "description": "32' vitron \ntv",
+          "quantity": 1
+        }
+      ],
+      "total": 190,
+      "date": "2025-07-01T12:53:00.564Z"
+    },
+    {
+      "id": "0ba0c0ea-3f6b-4b14-bc8c-3818e68fe110",
+      "userId": 1751374246183,
+      "username": "Omollo",
+      "items": [
+        {
+          "id": "c059f468-8d47-46ea-962b-963e90567907",
+          "name": "Mouse",
+          "price": 150,
+          "image": "https://m.media-amazon.com/images/I/61LtuGzXeaL._AC_SL1500_.jpg",
+          "description": "Wireless Mouse",
+          "quantity": 4
+        },
+        {
+          "id": "5e6c5edc-8c08-4cb2-a9f8-af8205bc447d",
+          "name": "Vitron smart",
+          "price": 40,
+          "image": "https://m.media-amazon.com/images/I/41LG0mB1uEL._SS522_.jpg",
+          "description": "32' vitron \ntv",
+          "quantity": 1
+        }
+      ],
+      "total": 190,
+      "date": "2025-07-01T13:00:34.274Z"
     }
   ]
 }
